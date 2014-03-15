@@ -16,6 +16,9 @@
 #include <cstring>
 
 
+//#include "GL/glext.h"
+//#include "GL/wglext.h"
+
 namespace glExt
 {
 	bool EXT_framebuffer_object = false;
@@ -153,29 +156,29 @@ PFNGLUNIFORMMATRIX4X3FVPROC glUniformMatrix4x3fv = 0x0;
 PFNGLGETSTRINGIPROC glGetStringi = 0x0;
 
 // GL_EXT_framebuffer_object
-PFNGLISRENDERBUFFEREXTPROC glIsRenderbufferEXT = 0x0;
-PFNGLBINDRENDERBUFFEREXTPROC glBindRenderbufferEXT = 0x0;
-PFNGLDELETERENDERBUFFERSEXTPROC glDeleteRenderbuffersEXT = 0x0;
-PFNGLGENRENDERBUFFERSEXTPROC glGenRenderbuffersEXT = 0x0;
-PFNGLRENDERBUFFERSTORAGEEXTPROC glRenderbufferStorageEXT = 0x0;
-PFNGLGETRENDERBUFFERPARAMETERIVEXTPROC glGetRenderbufferParameterivEXT = 0x0;
-PFNGLISFRAMEBUFFEREXTPROC glIsFramebufferEXT = 0x0;
-PFNGLBINDFRAMEBUFFEREXTPROC glBindFramebufferEXT = 0x0;
-PFNGLDELETEFRAMEBUFFERSEXTPROC glDeleteFramebuffersEXT = 0x0;
-PFNGLGENFRAMEBUFFERSEXTPROC glGenFramebuffersEXT = 0x0;
-PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC glCheckFramebufferStatusEXT = 0x0;
-PFNGLFRAMEBUFFERTEXTURE1DEXTPROC glFramebufferTexture1DEXT = 0x0;
-PFNGLFRAMEBUFFERTEXTURE2DEXTPROC glFramebufferTexture2DEXT = 0x0;
-PFNGLFRAMEBUFFERTEXTURE3DEXTPROC glFramebufferTexture3DEXT = 0x0;
-PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC glFramebufferRenderbufferEXT = 0x0;
-PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVEXTPROC glGetFramebufferAttachmentParameterivEXT = 0x0;
-PFNGLGENERATEMIPMAPEXTPROC glGenerateMipmapEXT = 0x0;
+PFNGLISRENDERBUFFERPROC glIsRenderbufferEXT = 0x0;
+PFNGLBINDRENDERBUFFERPROC glBindRenderbufferEXT = 0x0;
+PFNGLDELETERENDERBUFFERSPROC glDeleteRenderbuffersEXT = 0x0;
+PFNGLGENRENDERBUFFERSPROC glGenRenderbuffersEXT = 0x0;
+PFNGLRENDERBUFFERSTORAGEPROC glRenderbufferStorageEXT = 0x0;
+PFNGLGETRENDERBUFFERPARAMETERIVPROC glGetRenderbufferParameterivEXT = 0x0;
+PFNGLISFRAMEBUFFERPROC glIsFramebufferEXT = 0x0;
+PFNGLBINDFRAMEBUFFERPROC glBindFramebufferEXT = 0x0;
+PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffersEXT = 0x0;
+PFNGLGENFRAMEBUFFERSPROC glGenFramebuffersEXT = 0x0;
+PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatusEXT = 0x0;
+PFNGLFRAMEBUFFERTEXTURE1DPROC glFramebufferTexture1DEXT = 0x0;
+PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2DEXT = 0x0;
+PFNGLFRAMEBUFFERTEXTURE3DPROC glFramebufferTexture3DEXT = 0x0;
+PFNGLFRAMEBUFFERRENDERBUFFERPROC glFramebufferRenderbufferEXT = 0x0;
+PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC glGetFramebufferAttachmentParameterivEXT = 0x0;
+PFNGLGENERATEMIPMAPPROC glGenerateMipmapEXT = 0x0;
 
 // GL_EXT_framebuffer_blit
-PFNGLBLITFRAMEBUFFEREXTPROC glBlitFramebufferEXT = 0x0;
+PFNGLBLITFRAMEBUFFERPROC glBlitFramebufferEXT = 0x0;
 
 // GL_EXT_framebuffer_multisample
-PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC glRenderbufferStorageMultisampleEXT = 0x0;
+PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC glRenderbufferStorageMultisampleEXT = 0x0;
 
 // GL_ARB_timer_query
 PFNGLQUERYCOUNTERPROC glQueryCounter = 0x0;
@@ -186,30 +189,31 @@ PFNGLGETQUERYOBJECTUI64VPROC glGetQueryObjectui64v = 0x0;
 
 bool isExtensionSupported( const char *extName )
 {
-	if( glExt::majorVersion < 3 )
-	{
-		const char *extensions = (char *)glGetString( GL_EXTENSIONS );
-		size_t nameLen = strlen( extName );
-		const char *pos;
-		while( ( pos = strstr( extensions, extName ) ) != 0x0 )
-		{
-			char c = pos[nameLen];
-			if( c == ' ' || c == '\0' ) return true;
-			extensions = pos + nameLen;
-		}
-	}
-	else
-	{
-		GLint numExts;
-		glGetIntegerv( GL_NUM_EXTENSIONS, &numExts );
-		for( int i = 0; i < numExts; ++i )
-		{
-			if( strcmp( extName, (char *)glGetStringi( GL_EXTENSIONS, i ) ) == 0 )
-				return true;
-		}
-	}
+	//if( glExt::majorVersion < 3 )
+	//{
+	//	const char *extensions = (char *)glGetString( GL_EXTENSIONS );
+	//	size_t nameLen = strlen( extName );
+	//	const char *pos;
+	//	while( ( pos = strstr( extensions, extName ) ) != 0x0 )
+	//	{
+	//		char c = pos[nameLen];
+	//		if( c == ' ' || c == '\0' ) return true;
+	//		extensions = pos + nameLen;
+	//	}
+	//}
+	//else
+	//{
+	//	GLint numExts;
+	//	glGetIntegerv( GL_NUM_EXTENSIONS, &numExts );
+	//	for( int i = 0; i < numExts; ++i )
+	//	{
+	//		if( strcmp( extName, (char *)glGetStringi( GL_EXTENSIONS, i ) ) == 0 )
+	//			return true;
+	//	}
+	//}
 
-	return false;
+	//return false;
+	return true;
 }
 
 
@@ -389,23 +393,23 @@ bool initOpenGLExtensions()
 	glExt::EXT_framebuffer_object = isExtensionSupported( "GL_EXT_framebuffer_object" );
 	if( glExt::EXT_framebuffer_object )
 	{
-		r &= (glIsRenderbufferEXT = (PFNGLISRENDERBUFFEREXTPROC) platGetProcAddress( "glIsRenderbufferEXT" )) != 0x0;
-		r &= (glBindRenderbufferEXT = (PFNGLBINDRENDERBUFFEREXTPROC) platGetProcAddress( "glBindRenderbufferEXT" )) != 0x0;
-		r &= (glDeleteRenderbuffersEXT = (PFNGLDELETERENDERBUFFERSEXTPROC) platGetProcAddress( "glDeleteRenderbuffersEXT" )) != 0x0;
-		r &= (glGenRenderbuffersEXT = (PFNGLGENRENDERBUFFERSEXTPROC) platGetProcAddress( "glGenRenderbuffersEXT" )) != 0x0;
-		r &= (glRenderbufferStorageEXT = (PFNGLRENDERBUFFERSTORAGEEXTPROC) platGetProcAddress( "glRenderbufferStorageEXT" )) != 0x0;
-		r &= (glGetRenderbufferParameterivEXT = (PFNGLGETRENDERBUFFERPARAMETERIVEXTPROC) platGetProcAddress( "glGetRenderbufferParameterivEXT" )) != 0x0;
-		r &= (glIsFramebufferEXT = (PFNGLISFRAMEBUFFEREXTPROC) platGetProcAddress( "glIsFramebufferEXT" )) != 0x0;
-		r &= (glBindFramebufferEXT = (PFNGLBINDFRAMEBUFFEREXTPROC) platGetProcAddress( "glBindFramebufferEXT" )) != 0x0;
-		r &= (glDeleteFramebuffersEXT = (PFNGLDELETEFRAMEBUFFERSEXTPROC) platGetProcAddress( "glDeleteFramebuffersEXT" )) != 0x0;
-		r &= (glGenFramebuffersEXT = (PFNGLGENFRAMEBUFFERSEXTPROC) platGetProcAddress( "glGenFramebuffersEXT" )) != 0x0;
-		r &= (glCheckFramebufferStatusEXT = (PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC) platGetProcAddress( "glCheckFramebufferStatusEXT" )) != 0x0;
-		r &= (glFramebufferTexture1DEXT = (PFNGLFRAMEBUFFERTEXTURE1DEXTPROC) platGetProcAddress( "glFramebufferTexture1DEXT" )) != 0x0;
-		r &= (glFramebufferTexture2DEXT = (PFNGLFRAMEBUFFERTEXTURE2DEXTPROC) platGetProcAddress( "glFramebufferTexture2DEXT" )) != 0x0;
-		r &= (glFramebufferTexture3DEXT = (PFNGLFRAMEBUFFERTEXTURE3DEXTPROC) platGetProcAddress( "glFramebufferTexture3DEXT" )) != 0x0;
-		r &= (glFramebufferRenderbufferEXT = (PFNGLFRAMEBUFFERRENDERBUFFEREXTPROC) platGetProcAddress( "glFramebufferRenderbufferEXT" )) != 0x0;
-		r &= (glGetFramebufferAttachmentParameterivEXT = (PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVEXTPROC) platGetProcAddress( "glGetFramebufferAttachmentParameterivEXT" )) != 0x0;
-		r &= (glGenerateMipmapEXT = (PFNGLGENERATEMIPMAPEXTPROC) platGetProcAddress( "glGenerateMipmapEXT" )) != 0x0;
+		r &= (glIsRenderbufferEXT = (PFNGLISRENDERBUFFERPROC) platGetProcAddress( "glIsRenderbufferEXT" )) != 0x0;
+		r &= (glBindRenderbufferEXT = (PFNGLBINDRENDERBUFFERPROC) platGetProcAddress( "glBindRenderbufferEXT" )) != 0x0;
+		r &= (glDeleteRenderbuffersEXT = (PFNGLDELETERENDERBUFFERSPROC) platGetProcAddress( "glDeleteRenderbuffersEXT" )) != 0x0;
+		r &= (glGenRenderbuffersEXT = (PFNGLGENRENDERBUFFERSPROC) platGetProcAddress( "glGenRenderbuffersEXT" )) != 0x0;
+		r &= (glRenderbufferStorageEXT = (PFNGLRENDERBUFFERSTORAGEPROC) platGetProcAddress( "glRenderbufferStorageEXT" )) != 0x0;
+		r &= (glGetRenderbufferParameterivEXT = (PFNGLGETRENDERBUFFERPARAMETERIVPROC) platGetProcAddress( "glGetRenderbufferParameterivEXT" )) != 0x0;
+		r &= (glIsFramebufferEXT = (PFNGLISFRAMEBUFFERPROC) platGetProcAddress( "glIsFramebufferEXT" )) != 0x0;
+		r &= (glBindFramebufferEXT = (PFNGLBINDFRAMEBUFFERPROC) platGetProcAddress( "glBindFramebufferEXT" )) != 0x0;
+		r &= (glDeleteFramebuffersEXT = (PFNGLDELETEFRAMEBUFFERSPROC) platGetProcAddress( "glDeleteFramebuffersEXT" )) != 0x0;
+		r &= (glGenFramebuffersEXT = (PFNGLGENFRAMEBUFFERSPROC) platGetProcAddress( "glGenFramebuffersEXT" )) != 0x0;
+		r &= (glCheckFramebufferStatusEXT = (PFNGLCHECKFRAMEBUFFERSTATUSPROC) platGetProcAddress( "glCheckFramebufferStatusEXT" )) != 0x0;
+		r &= (glFramebufferTexture1DEXT = (PFNGLFRAMEBUFFERTEXTURE1DPROC)platGetProcAddress("glFramebufferTexture1D")) != 0x0;
+		r &= (glFramebufferTexture2DEXT = (PFNGLFRAMEBUFFERTEXTURE2DPROC)platGetProcAddress("glFramebufferTexture2D")) != 0x0;
+		r &= (glFramebufferTexture3DEXT = (PFNGLFRAMEBUFFERTEXTURE3DPROC)platGetProcAddress("glFramebufferTexture3D")) != 0x0;
+		r &= (glFramebufferRenderbufferEXT = (PFNGLFRAMEBUFFERRENDERBUFFERPROC) platGetProcAddress( "glFramebufferRenderbuffer" )) != 0x0;
+		r &= (glGetFramebufferAttachmentParameterivEXT = (PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC) platGetProcAddress( "glGetFramebufferAttachmentParameteriv" )) != 0x0;
+		r &= (glGenerateMipmapEXT = (PFNGLGENERATEMIPMAPPROC) platGetProcAddress( "glGenerateMipmap" )) != 0x0;
 	}
 	
 	glExt::EXT_texture_filter_anisotropic = isExtensionSupported( "GL_EXT_texture_filter_anisotropic" );
@@ -424,9 +428,9 @@ bool initOpenGLExtensions()
 	if( glExt::EXT_framebuffer_multisample )
 	{
 		// From GL_EXT_framebuffer_blit
-		r &= (glBlitFramebufferEXT = (PFNGLBLITFRAMEBUFFEREXTPROC) platGetProcAddress( "glBlitFramebufferEXT" )) != 0x0;
+		r &= (glBlitFramebufferEXT = (PFNGLBLITFRAMEBUFFERPROC) platGetProcAddress( "glBlitFramebufferEXT" )) != 0x0;
 		// From GL_EXT_framebuffer_multisample
-		r &= (glRenderbufferStorageMultisampleEXT = (PFNGLRENDERBUFFERSTORAGEMULTISAMPLEEXTPROC) platGetProcAddress( "glRenderbufferStorageMultisampleEXT" )) != 0x0;
+		r &= (glRenderbufferStorageMultisampleEXT = (PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC) platGetProcAddress( "glRenderbufferStorageMultisample" )) != 0x0;
 	}
 
 	glExt::ARB_timer_query = isExtensionSupported( "GL_ARB_timer_query" );

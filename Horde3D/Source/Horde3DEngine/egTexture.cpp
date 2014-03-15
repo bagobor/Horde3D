@@ -19,6 +19,7 @@
 
 #include "utDebug.h"
 
+#include <algorithm>
 
 namespace Horde3D {
 
